@@ -9,7 +9,7 @@ public class Interface {
 	 * The speed in MB of the Interface
 	 */
 	int speed;
-	
+
 	/**
 	 * Constructor for an Interface
 	 * @param id - the interger ID of an Interface

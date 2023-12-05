@@ -1,5 +1,7 @@
 
 import java.util.Map;
+import java.util.Vector;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class Node {
@@ -10,6 +12,12 @@ public class Node {
 	private Map<Node, Integer> adjacentNodes = new HashMap<>();
 	//map of all nodes and the minimum total weight
 	public static Map<Node, Integer> Nodes = new HashMap<>();
+
+	//vector of nodes visited
+	public static Vector<Node> nodesAvailable = new Vector<Node>();
+	//Sorted vector of info for nice printing
+	public static Vector<String> Sorted = new Vector<String>();
+
 	//Constructor for a new node
 	public Node(String name) {
 		this.name=name;
@@ -24,25 +32,40 @@ public class Node {
 		path=path +", " + previousNode;
 	}
 	
-	
+	//The algorithm
 	public static void calculateShortestPath(Node sourceNode) {
+	
+		nodesAvailable.add(sourceNode);
 		Nodes.replace(sourceNode, 0);
-		Nodes.forEach((k, v) -> {
-		      k.adjacentNodes.forEach((x,y) ->{
-		    	  if(Nodes.get(x) < 0) {
-		    		  Nodes.replace(x, y);
-		    	  }
-		    	  else if (Nodes.get(x)> y+v) {
-		    	  Nodes.replace(x, y+v);
-		    	  } 
-		    	  
-		      });
-		    });
+		sourceNode.path=sourceNode.name;
+		for(int i=0; i < nodesAvailable.size(); i++) {
+			int w= i;
+			nodesAvailable.get(i).adjacentNodes.forEach((k,v)->{
+				if(Nodes.get(k)==-1) {
+					Nodes.replace(k, v+Nodes.get(nodesAvailable.get(w)));
+					k.path= nodesAvailable.get(w).path+ k.name;
+				}
+				else if(v+Nodes.get(nodesAvailable.get(w))<= Nodes.get(k)) {
+					Nodes.replace(k, v+Nodes.get(nodesAvailable.get(w)));
+					k.path= nodesAvailable.get(w).path+ k.name;
+
+				}
+				nodesAvailable.add(k);
+			});
+		}
 	}
+	//Adds the info to the vector, sorts it, and prints it out	
 	public static void printNodesMap() {
+		
 		Nodes.forEach((k,v)->{
-			System.out.println(k.name + v);
+			if(v!=-1) {
+			Sorted.add("Router:" + k.name + " Shortest path weight:" + v + " Path:" + k.path);
+			}
 		});
+		Collections.sort(Sorted);
+		for(int g=0; g<Sorted.size(); g++) {
+			System.out.println(Sorted.get(g));
+		}
 	}
 }
 

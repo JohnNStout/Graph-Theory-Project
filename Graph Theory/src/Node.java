@@ -59,7 +59,7 @@ public class Node {
 		
 		Nodes.forEach((k,v)->{
 			if(v!=-1) {
-			Sorted.add("Router:" + k.name + " Shortest path weight:" + v + " Path:" + k.path);
+			Sorted.add("Node:" + k.name + " Minimum weight:" + v + " Path:" + k.path);
 			}
 		});
 		Collections.sort(Sorted);

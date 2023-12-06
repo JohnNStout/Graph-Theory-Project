@@ -20,8 +20,8 @@ public static void main(String[] args) {
 	if(network.contains("A")) {
 	nodeA.addAdjacentNode(nodeB, 2);
 	nodeA.addAdjacentNode(nodeC, 5);
-	nodeB.addAdjacentNode(nodeD, 10);
-	nodeC.addAdjacentNode(nodeD, 1);
+	nodeB.addAdjacentNode(nodeD, 2);
+	nodeC.addAdjacentNode(nodeD, 10);
 	}
 	
 	//Adding edges for Network B

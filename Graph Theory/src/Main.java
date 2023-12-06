@@ -55,9 +55,8 @@ public static void main(String[] args) {
 	//Runs the algorithm and prints out results.
 	Node.calculateShortestPath(nodeA);
 	Node.printNodesMap();
-	
-}
 
+}
 
 
 }
